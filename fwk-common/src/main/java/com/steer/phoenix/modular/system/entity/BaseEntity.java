@@ -1,4 +1,4 @@
-package com.steer.phoenix.entity;
+package com.steer.phoenix.modular.system.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

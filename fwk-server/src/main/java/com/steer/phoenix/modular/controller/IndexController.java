@@ -1,4 +1,4 @@
-package com.steer.phoenix.controller;
+package com.steer.phoenix.modular.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

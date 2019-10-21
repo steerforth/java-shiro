@@ -1,4 +1,4 @@
-package com.steer.phoenix.exception;
+package com.steer.phoenix.core.exception;
 
 import com.steer.phoenix.util.ResBundleUtil;
 

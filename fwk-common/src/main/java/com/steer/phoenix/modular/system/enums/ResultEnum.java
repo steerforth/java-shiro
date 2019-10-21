@@ -1,4 +1,4 @@
-package com.steer.phoenix.enums;
+package com.steer.phoenix.modular.system.enums;
 
 public enum ResultEnum {
     ok("SUCCESS", 200),

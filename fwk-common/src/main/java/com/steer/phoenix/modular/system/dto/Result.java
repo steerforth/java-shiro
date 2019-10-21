@@ -1,6 +1,6 @@
-package com.steer.phoenix.dto;
+package com.steer.phoenix.modular.system.dto;
 
-import com.steer.phoenix.enums.ResultEnum;
+import com.steer.phoenix.modular.system.enums.ResultEnum;
 
 public class Result<T> {
 

@@ -1,7 +1,7 @@
-package com.steer.phoenix.service;
+package com.steer.phoenix.modular.system.service;
 
 import com.steer.phoenix.BaseTest;
-import com.steer.phoenix.entity.User;
+import com.steer.phoenix.modular.system.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

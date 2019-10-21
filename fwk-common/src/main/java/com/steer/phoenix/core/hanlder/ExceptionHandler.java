@@ -1,10 +1,10 @@
-package com.steer.phoenix.hanlder;
+package com.steer.phoenix.core.hanlder;
 
 import com.alibaba.fastjson.JSON;
-import com.steer.phoenix.dto.Result;
-import com.steer.phoenix.enums.ResultEnum;
-import com.steer.phoenix.exception.AuthenticationException;
-import com.steer.phoenix.exception.BizException;
+import com.steer.phoenix.modular.system.dto.Result;
+import com.steer.phoenix.modular.system.enums.ResultEnum;
+import com.steer.phoenix.core.exception.AuthenticationException;
+import com.steer.phoenix.core.exception.BizException;
 import com.steer.phoenix.web.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
