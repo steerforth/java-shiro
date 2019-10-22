@@ -50,13 +50,16 @@ spring:
   banner:
     charset: UTF-8
   mvc:
-    static-path-pattern: /static/**
-
-
+    view:
+      prefix: /pages
   jpa:
     hibernate:
       ddl-auto: update #新增数据库链接必备的参数
     show-sql: false
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**Mapper.xml
@@ -93,3 +96,8 @@ server:
     context-path: /${project}
   tomcat:
     uri-encoding: utf-8
+
+###beetl###
+beetl:
+  #热加载beetl模板，开发时候用
+  resource-auto-check: true

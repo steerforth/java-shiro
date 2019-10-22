@@ -15,4 +15,13 @@ public class WebConfig implements WebMvcConfigurer {
         //本应用
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
+
+    /**
+     * 增加对rest api鉴权的spring mvc拦截器
+     */
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new RestApiInteceptor()).addPathPatterns("/gunsApi/**");
+//        registry.addInterceptor(new AttributeSetInteceptor()).excludePathPatterns(NONE_PERMISSION_RES).addPathPatterns("/**");
+//    }
 }
