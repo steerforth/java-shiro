@@ -1,11 +1,11 @@
-package com.steer.phoenix.util;
+package com.steer.phoenix.resource;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 @Slf4j
-public class ResBundleUtil {
+public class ResBundle {
     private static final String DEFAULT_NAME = "exception";
 
     private static Map<String, ResourceBundle> resMap = new HashMap<>();
