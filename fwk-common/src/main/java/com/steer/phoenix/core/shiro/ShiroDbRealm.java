@@ -1,5 +1,7 @@
 package com.steer.phoenix.core.shiro;
 
+import com.steer.phoenix.core.shiro.service.UserAuthService;
+import com.steer.phoenix.core.shiro.service.impl.UserAuthServiceImpl;
 import com.steer.phoenix.modular.system.entity.User;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -25,7 +27,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
             throws AuthenticationException {
-        UserAuthService shiroFactory = UserAuthServiceServiceImpl.me();
+        UserAuthService shiroFactory = UserAuthServiceImpl.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = shiroFactory.user(token.getUsername());
         ShiroUser shiroUser = shiroFactory.shiroUser(user);
@@ -37,7 +39,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        UserAuthService shiroFactory = UserAuthServiceServiceImpl.me();
+        UserAuthService shiroFactory = UserAuthServiceImpl.me();
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         List<Long> roleList = shiroUser.getRoleList();
 

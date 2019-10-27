@@ -1,5 +1,8 @@
 project: fwk-server
 
+steer:
+  spring-session-open: false
+
 spring:
   datasource:
     name: mysql_${project}
@@ -96,3 +99,12 @@ server:
     context-path: /${project}
   tomcat:
     uri-encoding: utf-8
+
+###beetl###
+beetl:
+  #热加载beetl模板，开发时候用
+  resource-auto-check: true
+  delimiter-statement-start: @
+  delimiter-statement-end: null
+  beetl.resource-tagroot: common/tags
+  resource-tagsuffix: tag

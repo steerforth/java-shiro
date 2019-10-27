@@ -11,5 +11,11 @@
 
     <artifactId>fwk-core</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+    </dependencies>
 </project>

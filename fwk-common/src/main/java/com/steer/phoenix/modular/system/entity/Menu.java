@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@TableName("sys_role")
+@TableName("sys_menu")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Role extends BaseEntity{
-    String name;
+public class Menu extends BaseEntity {
 }

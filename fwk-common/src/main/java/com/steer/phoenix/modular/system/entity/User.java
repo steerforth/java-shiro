@@ -2,11 +2,13 @@ package com.steer.phoenix.modular.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 @TableName("sys_user")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
     private String name;
     /**
@@ -28,4 +30,8 @@ public class User extends BaseEntity {
      * 乐观锁
      */
     private Integer version;
+    /**
+     * 多个角色以逗号分隔
+     */
+    private String roleId;
 }

@@ -1,4 +1,4 @@
-package com.steer.phoenix.config;
+package com.steer.phoenix.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

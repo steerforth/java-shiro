@@ -1,6 +1,8 @@
 package com.steer.phoenix.config.web;
 
-import com.steer.phoenix.config.SteerProperties;
+import com.steer.phoenix.config.properties.SteerProperties;
+import com.steer.phoenix.core.inteceptor.UserFilter;
+import com.steer.phoenix.core.shiro.ShiroDbRealm;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -22,12 +24,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 @Configuration
 public class ShiroConfig {
+    private static final List<String> NONE_PERMISSION_RES = Arrays.asList("/assets/**", "/api/open/**", "/login", "/global/sessionError", "/kaptcha", "/error", "/global/error");
+
+
     /**
      * 安全管理器
      */
@@ -45,7 +48,7 @@ public class ShiroConfig {
      * spring session管理器（多机环境）
      */
     @Bean
-    @ConditionalOnProperty(prefix = "guns", name = "spring-session-open", havingValue = "true")
+    @ConditionalOnProperty(prefix = "steer", name = "spring-session-open", havingValue = "true")
     public ServletContainerSessionManager servletContainerSessionManager() {
         return new ServletContainerSessionManager();
     }
@@ -54,7 +57,7 @@ public class ShiroConfig {
      * session管理器(单机环境)
      */
     @Bean
-    @ConditionalOnProperty(prefix = "guns", name = "spring-session-open", havingValue = "false")
+    @ConditionalOnProperty(prefix = "steer", name = "spring-session-open", havingValue = "false")
     public DefaultWebSessionManager defaultWebSessionManager(CacheManager cacheShiroManager, SteerProperties properties) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setCacheManager(cacheShiroManager);
@@ -133,7 +136,7 @@ public class ShiroConfig {
          * FIXME 覆盖默认的user拦截器(默认拦截器解决不了ajax请求 session超时的问题)
          */
         HashMap<String, Filter> myFilters = new HashMap<>();
-        myFilters.put("user", new GunsUserFilter());
+        myFilters.put("user", new UserFilter());
         shiroFilter.setFilters(myFilters);
 
         /**
