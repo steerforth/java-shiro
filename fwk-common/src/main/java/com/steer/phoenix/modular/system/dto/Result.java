@@ -14,6 +14,11 @@ public class Result<T> {
         return new Result<T>(code,"",null);
     }
 
+
+    public static <T> Result<T> errorResult(String desc){
+        return new Result<T>(ResultEnum.error_500.getCode(),desc,null);
+    }
+
     public static <T> Result<T> errorResult(int code,String desc){
         return new Result<T>(code,desc,null);
     }

@@ -26,10 +26,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.Filter;
 import java.util.*;
 
+import static com.steer.phoenix.constants.Constants.NONE_PERMISSION_RES;
+
 @Configuration
 public class ShiroConfig {
-    private static final List<String> NONE_PERMISSION_RES = Arrays.asList("/assets/**", "/api/open/**", "/login", "/global/sessionError", "/kaptcha", "/error", "/global/error");
-
 
     /**
      * 安全管理器

@@ -10,6 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * shiro 权限过滤器
+ */
 public class UserFilter extends AccessControlFilter {
     /**
      * Returns <code>true</code> if the request is a

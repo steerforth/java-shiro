@@ -3,7 +3,8 @@ package com.steer.phoenix.modular.system.enums;
 public enum ResultEnum {
     ok("SUCCESS", 200),
     error("ERROR", -1),
-    error_500("500", 500);
+    error_500("内部服务器错误", 500),
+    error_400("错误请求", 400);
 
     private String name;
     private int code;
