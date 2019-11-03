@@ -25,4 +25,5 @@ public class UserServiceTest extends BaseTest {
         User user = service.getById(1L);
         Assert.assertEquals("22", user.getName());
     }
+
 }

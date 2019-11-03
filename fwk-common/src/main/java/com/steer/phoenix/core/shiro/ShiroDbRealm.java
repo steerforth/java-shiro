@@ -25,8 +25,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
      * 登录认证
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
-            throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UserAuthService shiroFactory = UserAuthServiceImpl.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = shiroFactory.user(token.getUsername());

@@ -1,5 +1,7 @@
 package com.steer.phoenix.modular.system.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,5 +35,9 @@ public class User extends BaseEntity {
     /**
      * 多个角色以逗号分隔
      */
-    private String roleId;
+    private String roleIds;
+    @TableField(fill = FieldFill.INSERT)
+    private Long createUser;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateUser;
 }

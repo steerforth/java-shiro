@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.steer.phoenix.core.shiro.ShiroKit;
 import com.steer.phoenix.core.shiro.ShiroUser;
 import com.steer.phoenix.core.shiro.service.UserAuthService;
+import com.steer.phoenix.exception.Assert;
 import com.steer.phoenix.modular.system.entity.User;
 import com.steer.phoenix.modular.system.mapper.MenuMapper;
 import com.steer.phoenix.modular.system.service.RoleService;
@@ -60,7 +61,9 @@ public class UserAuthServiceImpl implements UserAuthService {
         ShiroUser shiroUser = ShiroKit.createShiroUser(user);
 
         //用户角色数组
-        Long[] roleArray = Convert.toLongArray(user.getRoleId());
+        Long[] roleArray = Convert.toLongArray(user.getRoleIds());
+
+        Assert.notNull(roleArray,10001003);
 
         //获取用户角色列表
         List<Long> roleList = new ArrayList<>();
