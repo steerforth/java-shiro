@@ -108,3 +108,45 @@ beetl:
   delimiter-statement-end: null
   beetl.resource-tagroot: common/tags
   resource-tagsuffix: tag
+
+
+####kafka配置####
+kafka:
+  bootstrap-server: 127.0.0.1:9092
+  group: ${project}
+  timeout: 30000
+  poll-time: 100
+  producer:
+    retries: 0
+    acks: all
+    batch-size: 16384
+    buffer-memory: 33554432
+    linger-ms: 1
+    max-block-ms: 1000
+  consumer:
+    enable-auto-commit: false
+    auto-commit-interval: 100
+    auto-offset-reset: latest
+    max-poll-interval-ms: 480000
+    max-poll-records: 300
+####redis配置####
+jedis:
+  #single单机,pool线程池,cluster集群模式
+  mode: pool
+  #集群节点集合
+  cluster-nodes:
+  - 127.0.0.1:6379
+  - 182.18.1.100:7002
+  - 182.18.1.101:7003
+  - 182.18.1.101:7004
+  - 182.18.1.102:7005
+  - 182.18.1.102:7006
+  cluster-node-timeout: 12000
+  connection-timeout: 2000
+  so-timeout: 1000
+  max-attempts: 1
+  pool :
+    max-total: 35
+    max-idle: 10
+    max-wait : 100000
+    test-on-borrow : true
