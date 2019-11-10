@@ -6,7 +6,7 @@ import com.steer.phoenix.redis.proxy.*;
 /**
  * @author fangwk
  */
-public class JedisCommandFactory {
+public class JedisCommandStrategyFactory {
     public static JedisCommand getCommand(JedisProxy proxy){
         switch (proxy.getJedisProperty().getMode()){
             case single:

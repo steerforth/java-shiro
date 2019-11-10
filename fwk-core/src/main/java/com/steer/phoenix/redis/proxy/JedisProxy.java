@@ -4,7 +4,7 @@ package com.steer.phoenix.redis.proxy;
 import com.steer.phoenix.properties.JedisProperty;
 import com.steer.phoenix.redis.aop.ReConnect;
 import com.steer.phoenix.redis.constants.JedisClusterStatus;
-import com.steer.phoenix.redis.factory.JedisCommandFactory;
+import com.steer.phoenix.redis.factory.JedisCommandStrategyFactory;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisClusterException;
 import redis.clients.jedis.exceptions.JedisClusterMaxAttemptsException;
@@ -25,63 +25,64 @@ public class JedisProxy implements JedisCommand{
     private JedisCommand command;
     private static final Object LOCK = new Object();
 
+    private JedisCommand getCommand(){
+        if (this.command == null){
+            synchronized (LOCK){
+                if (this.command == null){
+                    this.command = JedisCommandStrategyFactory.getCommand(this);
+                }
+            }
+        }
+        return this.command;
+    }
+
     @ReConnect(value = {JedisClusterException.class, JedisClusterMaxAttemptsException.class})
     public void hmset(String key, Map<String, String> hash) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        command.hmset(key, hash);
+        this.getCommand().hmset(key, hash);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public List<String> hmget(String key, String... fields) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        return command.hmget(key, fields);
+        return this.getCommand().hmget(key, fields);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void set(String key, String value) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        command.set(key, value);
+        this.getCommand().set(key, value);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public String get(String key) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        return command.get(key);
+        return this.getCommand().get(key);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void hset(String key, String field, String value) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        command.hset(key, field, value);
+        this.getCommand().hset(key, field, value);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void hset(String key, Map<String, String> hash) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        command.hset(key, hash);
+        this.getCommand().hset(key, hash);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public String hget(String key, String field) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        return command.hget(key, field);
+        return this.getCommand().hget(key, field);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public Map<String, String> hgetAll(String key) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        return command.hgetAll(key);
+        return this.getCommand().hgetAll(key);
     }
 
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public Long hdel(String key, String... field) {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        return command.hdel(key);
+        return this.getCommand().hdel(key);
     }
 
     public Closeable connect() {
-        JedisCommand command = JedisCommandFactory.getCommand(this);
-        Closeable closeable = command.connect();
+        Closeable closeable = this.getCommand().connect();
         this.setClient(closeable);
         return closeable;
     }
