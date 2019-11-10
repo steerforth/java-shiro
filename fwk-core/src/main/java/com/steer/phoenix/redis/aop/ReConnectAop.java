@@ -12,7 +12,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -22,13 +21,12 @@ import java.lang.reflect.Method;
  */
 @Component
 @Aspect
-@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class ReConnectAop {
     private Logger log = LoggerFactory.getLogger(ReConnectAop.class);
 
     private static final Object LOCK = new Object();
     //FIXME
-//    @Autowired
+    @Autowired
     private JedisProxy proxy;
 
     @Pointcut(value = "@annotation(com.steer.phoenix.redis.aop.ReConnect)")

@@ -27,8 +27,8 @@ public class RedisConfig {
         config.setTestOnBorrow(property.getPool().isTestOnBorrow());
         return config;
     }
-    //FIXME
-//    @Bean
+
+    @Bean
     public JedisProxy jedisProxy(JedisPoolConfig poolConfig) {
         JedisProxy proxy = new JedisProxy();
         proxy.setJedisProperty(property);

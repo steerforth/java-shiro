@@ -1,7 +1,6 @@
 package com.steer.phoenix.redis.proxy;
 
 
-
 import com.steer.phoenix.properties.JedisProperty;
 import com.steer.phoenix.redis.aop.ReConnect;
 import com.steer.phoenix.redis.constants.JedisClusterStatus;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 声明为单例使用
  * @author fangwk
  */
 public class JedisProxy implements JedisCommand{
@@ -22,71 +22,63 @@ public class JedisProxy implements JedisCommand{
     private Closeable client;
     private JedisProperty jedisProperty;
     private JedisPoolConfig poolConfig;
+    private JedisCommand command;
+    private static final Object LOCK = new Object();
 
-    @Override
     @ReConnect(value = {JedisClusterException.class, JedisClusterMaxAttemptsException.class})
     public void hmset(String key, Map<String, String> hash) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         command.hmset(key, hash);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public List<String> hmget(String key, String... fields) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         return command.hmget(key, fields);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void set(String key, String value) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         command.set(key, value);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public String get(String key) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         return command.get(key);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void hset(String key, String field, String value) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         command.hset(key, field, value);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public void hset(String key, Map<String, String> hash) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         command.hset(key, hash);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public String hget(String key, String field) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         return command.hget(key, field);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public Map<String, String> hgetAll(String key) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         return command.hgetAll(key);
     }
 
-    @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
     public Long hdel(String key, String... field) {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         return command.hdel(key);
     }
 
-    @Override
     public Closeable connect() {
         JedisCommand command = JedisCommandFactory.getCommand(this);
         Closeable closeable = command.connect();
