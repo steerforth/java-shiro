@@ -86,8 +86,8 @@ public class JedisProxy implements JedisCommand{
 
     @Override
     @ReConnect(value = {JedisClusterException.class,JedisClusterMaxAttemptsException.class})
-    public Long hdel(String key, String... field) {
-        return this.getCommand().hdel(key);
+    public Long hdel(String key, String... fields) {
+        return this.getCommand().hdel(key, fields);
     }
 
     @Override
