@@ -2,6 +2,9 @@ package com.steer.phoenix.config.web;
 
 import com.steer.phoenix.core.inteceptor.AttributeSetInteceptor;
 import com.steer.phoenix.core.inteceptor.RestApiInteceptor;
+import com.steer.phoenix.core.listener.ConfigListener;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -28,5 +31,13 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RestApiInteceptor()).addPathPatterns("/api/**");
         registry.addInterceptor(new AttributeSetInteceptor()).excludePathPatterns(NONE_PERMISSION_RES).addPathPatterns("/**");
+    }
+
+    /**
+     * ConfigListener注册
+     */
+    @Bean
+    public ServletListenerRegistrationBean<ConfigListener> configListenerRegistration() {
+        return new ServletListenerRegistrationBean<>(new ConfigListener());
     }
 }

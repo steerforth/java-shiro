@@ -3,6 +3,7 @@ package com.steer.phoenix.modular.controller;
 import com.steer.phoenix.controller.BaseController;
 import com.steer.phoenix.core.shiro.ShiroKit;
 import com.steer.phoenix.core.shiro.ShiroUser;
+import com.steer.phoenix.modular.system.service.MenuService;
 import com.steer.phoenix.modular.system.service.UserService;
 import com.steer.phoenix.node.MenuNode;
 import com.steer.phoenix.web.CookieUtil;
@@ -21,6 +22,8 @@ public class LoginController extends BaseController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private MenuService menuService;
     /**
      * 跳转到登录页面
      *
@@ -50,7 +53,7 @@ public class LoginController extends BaseController {
             return "/login";
         }
 
-        List<MenuNode> menus = userService.getUserMenuNodes(roleList);
+        List<MenuNode> menus = menuService.getMenuByRoleIds(roleList);
         model.addAttribute("menus", menus);
         return "/index";
     }

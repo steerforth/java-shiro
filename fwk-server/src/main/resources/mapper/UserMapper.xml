@@ -17,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, status, create_time AS createTime, update_time AS updateTime, account, password, salt, name, remark
+        id, status, create_time, update_time, account, password, salt, name, remark
     </sql>
 
     <sql id="Base_Table">

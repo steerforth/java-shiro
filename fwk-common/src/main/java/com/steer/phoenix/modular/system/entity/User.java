@@ -12,15 +12,15 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
+    /**
+     * 0为正常;9为删除
+     */
+    private Integer status;
     private String name;
     /**
-     * 字典
+     * 字典,改为枚举
      */
     private String sex;
-    /**
-     * 字典
-     */
-    private String status;
     private String avatar;
     private String account;
     private String password;
@@ -37,7 +37,7 @@ public class User extends BaseEntity {
      */
     private String roleIds;
     @TableField(fill = FieldFill.INSERT)
-    private Long createUser;
+    private Long createUserId;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateUser;
+    private Long updateUserId;
 }

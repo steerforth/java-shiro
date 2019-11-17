@@ -18,7 +18,7 @@ public class Role extends BaseEntity{
     Integer sort;
     Integer version;
     @TableField(fill = FieldFill.INSERT)
-    Long createUser;
+    Long createUserId;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    Long updateUser;
+    Long updateUserId;
 }

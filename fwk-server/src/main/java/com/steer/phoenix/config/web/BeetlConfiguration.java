@@ -1,5 +1,6 @@
 package com.steer.phoenix.config.web;
 
+import com.steer.phoenix.util.ToolUtil;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class BeetlConfiguration extends BeetlGroupUtilConfiguration {
 
         //全局共享方法
 //        groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
-//        groupTemplate.registerFunctionPackage("tool", new ToolUtil());
+        groupTemplate.registerFunctionPackage("tool", new ToolUtil());
 //        groupTemplate.registerFunctionPackage("kaptcha", new KaptchaUtil());
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.steer.phoenix.modular.system.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.steer.phoenix.modular.system.entity.Menu">
+        <id column="id" property="id" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="parent_id" property="parentId" />
+        <result column="code" property="code" />
+        <result column="pcode" property="pcode" />
+        <result column="pcodes" property="pcodes" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+        <result column="url" property="url" />
+        <result column="level" property="level" />
+        <result column="sort" property="sort" />
+        <result column="desc" property="desc" />
+        <result column="type" property="type" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="update_user_id" property="updateUserId" />
+    </resultMap>
+
+    <resultMap id="menuNodeMap" type="com.steer.phoenix.node.MenuNode">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+        <result column="url" property="url" />
+        <result column="level" property="levels" />
+        <result column="sort" property="num" />
+        <!--<result column="type" property="type" />-->
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, status, create_time, update_time, code, pcode, pcodes, name, icon,
+        url, level, sort, desc, type, create_user_id, update_user_id
+    </sql>
+
+    <sql id="Base_Table">
+        sys_menu
+    </sql>
+
+    <sql id="Base_Role_Menu_Table">
+        sys_role_menu
+    </sql>
+
+    <select id="getMenuByRoleIds" parameterType="java.lang.String" resultMap="menuNodeMap">
+        SELECT
+         id,icon,parent_id,name,url,level,sort
+--          ,m1.type AS type,
+        FROM
+        <include refid="Base_Table" />
+        WHERE
+        type = 'Menu'
+        AND
+        id
+        IN(
+          SELECT menu_id
+          FROM <include refid="Base_Role_Menu_Table" />
+          WHERE role_id IN
+          <foreach collection="roleIds" index="index" item="i" open="(" separator="," close=")">
+              #{i}
+          </foreach>
+        )
+--         AND
+--         status &lt;&gt; 9
+    </select>
+</mapper>

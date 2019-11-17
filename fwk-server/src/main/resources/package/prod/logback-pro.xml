@@ -56,7 +56,7 @@
         <logger name="org.hibernate" level="WARN" />
         <logger name="org.mybatis" level="WARN" />
         <logger name="org.apache.ibatis" level="WARN" />
-        <logger name="org.thymeleaf" level="WARN" />
+        <logger name="org.beetl" level="WARN" />
         <logger name="com.baomidou.mybatisplus" level="WARN" />
 
         <logger name="com.steer.phoenix" level="INFO" />
