@@ -92,6 +92,9 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
+logging:
+  config: classpath:logback-${profile}.xml
+
 server:
   port: 5050
   max-http-header-size: 10240

@@ -25,8 +25,8 @@ public class ReConnectAop {
     private Logger log = LoggerFactory.getLogger(ReConnectAop.class);
 
     private static final Object LOCK = new Object();
-    //FIXME
-    @Autowired
+
+    @Autowired(required = false)
     private JedisProxy proxy;
 
     @Pointcut(value = "@annotation(com.steer.phoenix.redis.aop.ReConnect)")

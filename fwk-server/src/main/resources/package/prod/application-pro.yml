@@ -64,6 +64,9 @@ spring:
       max-request-size: 100MB
       max-file-size: 100MB
 
+logging:
+  config: classpath:logback-${profile}.xml
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/**Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
