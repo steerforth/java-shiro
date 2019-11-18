@@ -1,4 +1,4 @@
-package com.steer.phoenix.modular.controller;
+package com.steer.phoenix.modular.system.controller;
 
 import com.steer.phoenix.controller.BaseController;
 import com.steer.phoenix.core.shiro.ShiroKit;

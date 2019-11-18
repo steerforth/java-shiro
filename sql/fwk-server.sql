@@ -11,11 +11,31 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 17/11/2019 22:37:29
+ Date: 18/11/2019 23:01:40
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sys_dept
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dept`;
+CREATE TABLE `sys_dept` (
+  `id` bigint(20) NOT NULL,
+  `pid` bigint(20) NOT NULL,
+  `pids` varchar(512) NOT NULL,
+  `simple_name` varchar(45) DEFAULT NULL,
+  `sort` int(5) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `create_user_id` bigint(20) NOT NULL,
+  `update_user_id` bigint(20) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -37,6 +57,8 @@ CREATE TABLE `sys_menu` (
   `update_user_id` bigint(20) NOT NULL,
   `status` int(3) NOT NULL,
   `pid` bigint(20) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,13 +66,13 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 'system', '0', '[0],', 'layui-icon layui-icon-username', '#', 1, 100, NULL, 'Menu', 1, 1, 0, 0);
-INSERT INTO `sys_menu` VALUES (2, '用户管理', 'user', 'system', '[0],[system],', NULL, '/user', 2, 1, NULL, 'Menu', 1, 1, 0, 1);
-INSERT INTO `sys_menu` VALUES (3, '添加用户', 'user_add', 'user', '[0],[system],[user],', NULL, '/user/add', 3, 1, NULL, 'Button', 1, 1, 0, 2);
-INSERT INTO `sys_menu` VALUES (4, '修改用户', 'user_edit', 'user', '[0],[system],[user],', NULL, '/user/edit', 3, 2, NULL, 'Button', 1, 1, 0, 2);
-INSERT INTO `sys_menu` VALUES (5, '删除用户', 'user_delete', 'user', '[0],[system],[user],', NULL, '/user/delete', 3, 3, NULL, 'Button', 1, 1, 0, 2);
-INSERT INTO `sys_menu` VALUES (10, '角色管理', 'role', 'system', '[0],[system],', NULL, '/role', 2, 2, NULL, 'Menu', 1, 1, 0, 1);
-INSERT INTO `sys_menu` VALUES (20, '菜单管理', 'menu', 'system', '[0],[system],', NULL, '/menu', 2, 3, NULL, 'Menu', 1, 1, 0, 1);
+INSERT INTO `sys_menu` VALUES (1, '系统管理', 'system', '0', '[0],', 'layui-icon layui-icon-username', '#', 1, 100, NULL, 'Menu', 1, 1, 0, 0, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (2, '用户管理', 'user', 'system', '[0],[system],', NULL, '/user', 2, 1, NULL, 'Menu', 1, 1, 0, 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (3, '添加用户', 'user_add', 'user', '[0],[system],[user],', NULL, '/user/add', 3, 1, NULL, 'Button', 1, 1, 0, 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (4, '修改用户', 'user_edit', 'user', '[0],[system],[user],', NULL, '/user/edit', 3, 2, NULL, 'Button', 1, 1, 0, 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (5, '删除用户', 'user_delete', 'user', '[0],[system],[user],', NULL, '/user/delete', 3, 3, NULL, 'Button', 1, 1, 0, 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (10, '角色管理', 'role', 'system', '[0],[system],', NULL, '/role', 2, 2, NULL, 'Menu', 1, 1, 0, 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (20, '菜单管理', 'menu', 'system', '[0],[system],', NULL, '/menu', 2, 3, NULL, 'Menu', 1, 1, 0, 1, NULL, NULL);
 COMMIT;
 
 -- ----------------------------

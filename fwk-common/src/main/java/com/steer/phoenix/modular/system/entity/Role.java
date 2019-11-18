@@ -16,6 +16,7 @@ public class Role extends BaseEntity{
      */
     String pid;
     Integer sort;
+    String desc;
     Integer version;
     @TableField(fill = FieldFill.INSERT)
     Long createUserId;
