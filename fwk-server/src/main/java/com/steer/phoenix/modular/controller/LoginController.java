@@ -84,7 +84,7 @@ public class LoginController extends BaseController {
         currentUser.login(token);
 
         //登录成功，记录登录日志
-        ShiroUser shiroUser = ShiroKit.getUserNotNull();
+//        ShiroUser shiroUser = ShiroKit.getUserNotNull();
 //        LogManager.me().executeLog(LogTaskFactory.loginLog(shiroUser.getId(), getIp()));
 
         //FIXME

@@ -1,4 +1,4 @@
-package com.steer.phoenix.modular.system.enums;
+package com.steer.phoenix.enums;
 
 public enum MenuType {
     Menu("菜单",0),

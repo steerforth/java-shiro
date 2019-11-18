@@ -30,7 +30,7 @@
         <result column="icon" property="icon" />
         <result column="url" property="url" />
         <result column="level" property="levels" />
-        <result column="sort" property="num" />
+        <result column="sort" property="sort" />
         <!--<result column="type" property="type" />-->
     </resultMap>
 
@@ -59,7 +59,7 @@
         AND
         id
         IN(
-          SELECT menu_id
+          SELECT DISTINCT menu_id
           FROM <include refid="Base_Role_Menu_Table" />
           WHERE role_id IN
           <foreach collection="roleIds" index="index" item="i" open="(" separator="," close=")">
