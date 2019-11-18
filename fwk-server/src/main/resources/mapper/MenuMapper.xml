@@ -25,13 +25,13 @@
 
     <resultMap id="menuNodeMap" type="com.steer.phoenix.node.MenuNode">
         <id column="id" property="id" />
-        <result column="parent_id" property="parentId" />
+        <result column="pid" property="pid" />
         <result column="name" property="name" />
         <result column="icon" property="icon" />
         <result column="url" property="url" />
-        <result column="level" property="levels" />
+        <result column="level" property="level" />
         <result column="sort" property="sort" />
-        <!--<result column="type" property="type" />-->
+        <result column="type" property="type" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -50,8 +50,7 @@
 
     <select id="getMenuByRoleIds" parameterType="java.lang.String" resultMap="menuNodeMap">
         SELECT
-         id,icon,parent_id,name,url,level,sort
---          ,m1.type AS type,
+        id,icon,pid,name,url,level,sort,type
         FROM
         <include refid="Base_Table" />
         WHERE
@@ -66,7 +65,5 @@
               #{i}
           </foreach>
         )
---         AND
---         status &lt;&gt; 9
     </select>
 </mapper>

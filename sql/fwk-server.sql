@@ -36,7 +36,7 @@ CREATE TABLE `sys_menu` (
   `create_user_id` bigint(20) NOT NULL,
   `update_user_id` bigint(20) NOT NULL,
   `status` int(3) NOT NULL,
-  `parent_id` bigint(20) DEFAULT NULL,
+  `pid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

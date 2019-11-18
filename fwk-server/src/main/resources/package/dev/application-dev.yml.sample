@@ -99,7 +99,7 @@ server:
   port: 5050
   max-http-header-size: 10240
   servlet:
-    context-path: /${project}
+    context-path: /
   tomcat:
     uri-encoding: utf-8
 

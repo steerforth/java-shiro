@@ -21,6 +21,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper,Menu> implements Men
         if (roleIds == null || roleIds.size()==0){
             return new ArrayList<>(0);
         }
-        return mapper.getMenuByRoleIds(roleIds);
+
+        return  MenuNode.buildTree(mapper.getMenuByRoleIds(roleIds));
     }
 }

@@ -14,7 +14,7 @@ public class Menu extends BaseEntity {
 
     private Integer status;
 
-    private Long parentId;
+    private Long pid;
 
     private String code;
     //TODO parentId

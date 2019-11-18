@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-public class MenuNode implements Comparable,Serializable {
+public class MenuNode implements Serializable {
     /**
      * 节点id
      */
@@ -19,7 +19,7 @@ public class MenuNode implements Comparable,Serializable {
     /**
      * 父节点
      */
-    private Long parentId;
+    private Long pid;
 
     /**
      * 节点名称
@@ -28,26 +28,13 @@ public class MenuNode implements Comparable,Serializable {
 
     /**
      * 按钮级别
-     * //TODO levels  or level?
      */
     private Integer level;
 
-//    /**
-//     * 按钮级别(Y  N)
-//     */
-//    private String ismenu;
-    private MenuType type;
-
     /**
-     * TODO ？  sort?
      * 按钮的排序
      */
     private Integer sort;
-
-    /**
-     * 节点的url
-     */
-    private String url;
 
     /**
      * 节点图标
@@ -55,19 +42,16 @@ public class MenuNode implements Comparable,Serializable {
     private String icon;
 
     /**
+     * 节点的url
+     */
+    private String url;
+
+    /**
      * 子节点的集合
      */
     private List<MenuNode> children;
 
-    /**
-     * 查询子节点时候的临时集合
-     */
-//    private List<MenuNode> linkedList = new ArrayList<>();
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
+    private MenuType type;
 
     /**
      * 构建菜单
@@ -79,17 +63,17 @@ public class MenuNode implements Comparable,Serializable {
         }
         List<MenuNode> sortNodes = nodes.stream().filter(n->n.getType().equals(MenuType.Menu)).sorted(Comparator.comparing(MenuNode::getLevel).thenComparing(MenuNode::getSort)).collect(Collectors.toList());
 
-        List<MenuNode> rootNodes = getRootNodes(sortNodes);
-
-        return buildWithLevel(sortNodes);
+        return buildWithChildren(0L,sortNodes);
     }
 
-    private static List<MenuNode> getRootNodes(List<MenuNode> sortNodes) {
-        return sortNodes.stream().filter(n->n.getParentId() == 0L).collect(Collectors.toList());
-    }
-
-    private static List<MenuNode> buildWithLevel(List<MenuNode> sortNodes) {
-        //TODO
-        return null;
+    private static List<MenuNode> buildWithChildren(Long pid, List<MenuNode> sortNodes) {
+        List<MenuNode> menus = new ArrayList<>();
+        for (int i = 0; i < sortNodes.size(); i++) {
+            if (sortNodes.get(i).getPid() == pid){
+                sortNodes.get(i).setChildren(buildWithChildren(sortNodes.get(i).getId(),sortNodes));
+                menus.add(sortNodes.get(i));
+            }
+        }
+        return menus;
     }
 }
