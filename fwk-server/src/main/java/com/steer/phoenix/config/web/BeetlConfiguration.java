@@ -1,5 +1,6 @@
 package com.steer.phoenix.config.web;
 
+import com.steer.phoenix.core.beetl.ext.ShiroExt;
 import com.steer.phoenix.util.ToolUtil;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 
@@ -17,7 +18,7 @@ public class BeetlConfiguration extends BeetlGroupUtilConfiguration {
         groupTemplate.setSharedVars(shared);
 
         //全局共享方法
-//        groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
+        groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
         groupTemplate.registerFunctionPackage("tool", new ToolUtil());
 //        groupTemplate.registerFunctionPackage("kaptcha", new KaptchaUtil());
     }
