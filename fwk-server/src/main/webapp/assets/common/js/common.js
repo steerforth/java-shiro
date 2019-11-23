@@ -107,7 +107,7 @@ layui.config({
         top.layui.admin.activeNav(location.href.substring(Feng.ctxPath.length));
     }
 
-    // 移除loading动画
+    // 移除loading动画,延时移除加载动画是给切换主题预留时间
     setTimeout(function () {
         admin.removeLoading();
     }, window == top ? 300 : 150);
