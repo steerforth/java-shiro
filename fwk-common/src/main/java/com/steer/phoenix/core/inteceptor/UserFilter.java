@@ -25,6 +25,7 @@ public class UserFilter extends AccessControlFilter {
      * if the current {@link #getSubject(ServletRequest, ServletResponse) subject}
      * is not <code>null</code>, <code>false</code> otherwise.
      */
+    @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
 
         if (isLoginRequest(request, response)) {
@@ -42,6 +43,7 @@ public class UserFilter extends AccessControlFilter {
      * and then immediately returns <code>false</code>, thereby preventing the chain from continuing so the redirect may
      * execute.
      */
+    @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
