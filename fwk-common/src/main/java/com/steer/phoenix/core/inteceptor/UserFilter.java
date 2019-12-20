@@ -1,18 +1,17 @@
 package com.steer.phoenix.core.inteceptor;
 
-import com.steer.phoenix.core.shiro.ShiroKit;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * shiro 权限过滤器
  */
+@Slf4j
+@Deprecated
 public class UserFilter extends AccessControlFilter {
     /**
      * Returns <code>true</code> if the request is a
@@ -45,39 +44,42 @@ public class UserFilter extends AccessControlFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
-        HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
+        log.warn("{} access denied!!!!",request.getRemoteHost());
+        return false;
 
-        /**
-         * 如果是ajax请求则不进行跳转
-         */
-        if (httpServletRequest.getHeader("x-requested-with") != null
-                && httpServletRequest.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
-            httpServletResponse.setHeader("sessionstatus", "timeout");
-            return false;
-        } else {
-
-            /**
-             * 第一次点击页面
-             */
-            String referer = httpServletRequest.getHeader("Referer");
-            if (referer == null) {
-                saveRequestAndRedirectToLogin(request, response);
-                return false;
-            } else {
-
-                /**
-                 * 从别的页面跳转过来的
-                 */
-                if (ShiroKit.getSession().getAttribute("sessionFlag") == null) {
-                    httpServletRequest.setAttribute("tips", "session超时");
-                    httpServletRequest.getRequestDispatcher("/login").forward(request, response);
-                    return false;
-                } else {
-                    saveRequestAndRedirectToLogin(request, response);
-                    return false;
-                }
-            }
-        }
+        //        HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
+//        HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
+//
+//        /**
+//         * 如果是ajax请求则不进行跳转
+//         */
+//        if (httpServletRequest.getHeader("x-requested-with") != null
+//                && httpServletRequest.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+//            httpServletResponse.setHeader("sessionstatus", "timeout");
+//            return false;
+//        } else {
+//
+//            /**
+//             * 第一次点击页面
+//             */
+//            String referer = httpServletRequest.getHeader("Referer");
+//            if (referer == null) {
+//                saveRequestAndRedirectToLogin(request, response);
+//                return false;
+//            } else {
+//
+//                /**
+//                 * 从别的页面跳转过来的
+//                 */
+//                if (ShiroKit.getSession().getAttribute("sessionFlag") == null) {
+//                    httpServletRequest.setAttribute("tips", "session超时");
+//                    httpServletRequest.getRequestDispatcher("/login").forward(request, response);
+//                    return false;
+//                } else {
+//                    saveRequestAndRedirectToLogin(request, response);
+//                    return false;
+//                }
+//            }
+//        }
     }
 }

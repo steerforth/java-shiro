@@ -22,18 +22,39 @@ import java.util.Set;
 public class ShiroDbRealm extends AuthorizingRealm {
 
     /**
+     * 必须重写此方法，不然Shiro会报错
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JwtAuthenticationToken;
+    }
+
+    /**
+     * 清除当前用户的权限认证缓存
+     *
+     * @param principals 权限信息
+     */
+    @Override
+    public void clearCache(PrincipalCollection principals) {
+        super.clearCache(principals);
+    }
+
+    /**
+     * 调用Subject的login方法执行
      * 登录认证
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UserAuthService shiroFactory = UserAuthServiceImpl.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+        //数据库查询user
         User user = shiroFactory.user(token.getUsername());
         ShiroUser shiroUser = shiroFactory.shiroUser(user);
         return shiroFactory.info(shiroUser, user, super.getName());
     }
 
     /**
+     * 访问controller  api时执行
      * 权限认证
      */
     @Override

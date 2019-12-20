@@ -8,24 +8,22 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * restful api 拦截器
- */
-@Deprecated
-public class RestApiInteceptor extends HandlerInterceptorAdapter {
-    private static final String AUTH_PATH = "/api/auth";
+import static com.steer.phoenix.constants.Constants.AUTH_HEADER;
+import static com.steer.phoenix.constants.Constants.AUTH_PATH;
 
-    private static final String AUTH_HEADER = "Authorization";
+@Deprecated
+public class JwtInteceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //resource handler
         if (handler instanceof org.springframework.web.servlet.resource.ResourceHttpRequestHandler) {
             return true;
         }
-        return check(request, response);
+        return checkJwt(request, response);
     }
 
-    private boolean check(HttpServletRequest request, HttpServletResponse response) {
+    private boolean checkJwt(HttpServletRequest request, HttpServletResponse response) {
         if (request.getServletPath().equals(AUTH_PATH)) {
             return true;
         }

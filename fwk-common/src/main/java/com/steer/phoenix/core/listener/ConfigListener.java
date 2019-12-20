@@ -6,6 +6,8 @@ import javax.servlet.ServletContextListener;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Deprecated
 public class ConfigListener implements ServletContextListener {
     private static final String CONTEXT_PATH = "contextPath";
     private static final String REAL_PATH = "realPath";

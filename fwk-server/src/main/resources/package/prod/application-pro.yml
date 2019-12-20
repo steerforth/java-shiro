@@ -148,8 +148,8 @@ jedis:
   connection-timeout: 2000
   so-timeout: 1000
   max-attempts: 1
-  pool :
+  pool:
     max-total: 35
-    max-idle: 10
-    max-wait : 100000
-    test-on-borrow : true
+    max-idle: 15
+    max-wait: 100000
+    test-on-borrow: true

@@ -2,15 +2,15 @@ package com.steer.phoenix.exception;
 
 import com.steer.phoenix.resource.ResBundle;
 
-public class AuthenticationException extends Exception {
+public class ShiroAuthenticationException extends Exception {
     private int code;
 
-    public AuthenticationException(int code){
+    public ShiroAuthenticationException(int code){
         super(ResBundle.getMessage(String.valueOf(code)));
         this.code = code;
     }
 
-    public AuthenticationException(int code,Throwable cause){
+    public ShiroAuthenticationException(int code, Throwable cause){
         super(ResBundle.getMessage(String.valueOf(code)),cause);
         this.code = code;
     }
